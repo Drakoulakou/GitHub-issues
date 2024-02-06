@@ -74,11 +74,27 @@ function Issues() {
     return true;
   });
 
+  const options = [
+    { value: "all", name: "All" },
+    { value: "open", name: "Open" },
+    { value: "closed", name: "Closed" },
+  ];
+
   return (
     <div>
-      <h1>GitHub Issues</h1>
-      <Dropdown filter={statusFilter} setFilter={setStatusFilter} />
-      <IssuesList issues={filteredIssues} />
+      <h1>GitHub Issues for ReactJS repository</h1>
+      <Dropdown
+        filter={statusFilter}
+        setFilter={setStatusFilter}
+        options={options}
+        label="Choose Status: "
+      />
+      <IssuesList
+        issues={filteredIssues}
+        linkTitle="View on GitHub"
+        statusTitle="Status: "
+        createdAtTitle="Created at: "
+      />
       {hasNextPage && <button onClick={loadMoreIssues}>Load More</button>}
     </div>
   );

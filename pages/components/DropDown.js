@@ -1,13 +1,15 @@
 import React from "react";
 
-const Dropdown = ({ filter, setFilter }) => {
+const Dropdown = ({ filter, setFilter, options, label }) => {
   return (
     <label>
-      Choose Status:
+      {label}
       <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-        <option value="all">All</option>
-        <option value="open">Open</option>
-        <option value="closed">Closed</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.name}
+          </option>
+        ))}
       </select>
     </label>
   );

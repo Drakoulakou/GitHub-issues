@@ -1,5 +1,4 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
 import Issues from "./components/issues";
 
 export default function Home() {
