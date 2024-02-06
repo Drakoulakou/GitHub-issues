@@ -5,7 +5,7 @@ const IssuesList = ({ issues, linkTitle, statusTitle, createdAtTitle }) => {
     <ul>
       {issues?.map((issue) => (
         <li key={issue.url}>
-          <strong>{issue.title}</strong>
+          <h3>{issue.title}</h3>
           <p>
             {createdAtTitle} {new Date(issue.createdAt).toLocaleDateString()}
           </p>

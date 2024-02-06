@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Issues from "./components/issues";
+import Issues from "./components/Issues";
 
 export default function Home() {
   return (
