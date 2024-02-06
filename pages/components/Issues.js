@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client";
+import IssuesList from "./IssuesList";
+import Dropdown from "./DropDown";
 
 const GET_GITHUB_ISSUES = gql`
   query ($cursor: String) {
@@ -22,7 +24,7 @@ const GET_GITHUB_ISSUES = gql`
 `;
 
 function Issues() {
-  const [filter, setFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   const { loading, error, data, fetchMore } = useQuery(GET_GITHUB_ISSUES, {
     context: {
@@ -62,11 +64,11 @@ function Issues() {
   };
 
   const filteredIssues = issues?.filter((issue) => {
-    if (filter === "all") {
+    if (statusFilter === "all") {
       return true;
-    } else if (filter === "open") {
+    } else if (statusFilter === "open") {
       return !issue.closed;
-    } else if (filter === "closed") {
+    } else if (statusFilter === "closed") {
       return issue.closed;
     }
     return true;
@@ -74,27 +76,9 @@ function Issues() {
 
   return (
     <div>
-      <h2>GitHub Issues</h2>
-      <label>
-        Choose Status:
-        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-          <option value="all">All</option>
-          <option value="open">Open</option>
-          <option value="closed">Closed</option>
-        </select>
-      </label>
-      <ul>
-        {filteredIssues?.map((issue) => (
-          <li key={issue.url}>
-            <strong>{issue.title}</strong>
-            <p>Created at: {new Date(issue.createdAt).toLocaleDateString()}</p>
-            <p>Status: {issue.closed ? "Closed" : "Open"}</p>
-            <a href={issue.url} target="_blank" rel="noopener noreferrer">
-              View on GitHub
-            </a>
-          </li>
-        ))}
-      </ul>
+      <h1>GitHub Issues</h1>
+      <Dropdown filter={statusFilter} setFilter={setStatusFilter} />
+      <IssuesList issues={filteredIssues} />
       {hasNextPage && <button onClick={loadMoreIssues}>Load More</button>}
     </div>
   );
