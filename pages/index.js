@@ -12,7 +12,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>GitHub Issues</h1>
         <Issues />
       </main>
     </>
