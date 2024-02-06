@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import { ApolloProvider } from "@apollo/client";
-import client from "./apolloClient";
+import client from "../utils/apolloClient";
 
 function App({ Component, pageProps }) {
   return (
